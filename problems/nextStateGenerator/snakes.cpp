@@ -61,11 +61,12 @@ int getScore(int grid[N][N])
 
 
 // Checks if the game is terminated
-bool isGameTerminated(int grid[N][N])
+bool isGameTerminated(int grid[N][N], int hx, int hy)
 {
-    for(int i = 0;i < N;++i)
-        for(int j = 0;j < N;++j)
-            if(grid[i][j] != 1) return false;
+    if(hx > 0 and grid[hx-1][hy] == 0) return true;
+    if(hx < N-1 and grid[hx+1][hy] == 0) return true;
+    if(hy > 0 and grid[hx][hy-1] == 0) return true;
+    if(hy < N-1 and grid[hx][hy+1] == 0) return true;
     return true;
 }
 
@@ -118,7 +119,7 @@ int main(int argc, char* argv[])
         cout << endl;
     }
 
-    cout << x << ' ' << y << endl;
+    cout << hx << ' ' << hy << endl;
 
     cout << "CHECKER OUTPUT" << endl;
 
@@ -126,7 +127,7 @@ int main(int argc, char* argv[])
     score = getScore(grid);
 
     // Check if game is terminated
-    if(isGameTerminated(grid))
+    if(isGameTerminated(grid, hx, hy))
         cout << "END " << score << endl;
     else
         cout << "INBETWEEN " << score << endl;
