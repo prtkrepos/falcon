@@ -1,10 +1,12 @@
 from django.conf.urls import patterns, include, url
-
+import interface
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 # admin.autodiscover()
 
 urlpatterns = patterns('',
+
+	url(r'^interface/', include('interface.urls')),
     # Examples:
     # url(r'^$', 'falcon.views.home', name='home'),
     # url(r'^falcon/', include('falcon.foo.urls')),

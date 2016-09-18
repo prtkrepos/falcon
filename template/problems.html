@@ -14,14 +14,40 @@ Falcon: {{ problem.problem_name }}
     {{ problem.starting_state  }}
 </div>
 <table>
-    <form action='' method='POST' enctype="multipart/form-data">
+    <form action='/interface/' id = "form_upload" method='POST' enctype="multipart/form-data">
         {% csrf_token %}
         {% for field in problem %}
             <tr><td>{{ field.label_tag  }}</td> <td>{{ field   }}</td></tr>
         {% endfor %}
         <tr><td>Solution:</td> <td><input type='file' name='solution'/></td></tr>
-        <tr><td><input type='submit' value='Submit' /></td></tr>
+        <p id = "para"> </p>
+        <tr><td><input  id = "file-submit" type='submit' value='Submit' /></td></tr>
     </form>
 </table>
 
+
+<script type="text/javascript">
+    
+    $(function() {
+        $('#form_upload').submit(function(){
+            if ($.data(this, 'submitted')) return false;
+            
+            var val =1;
+            this.action += (this.action.indexOf('?') == -1 ? '?' : '&') + 'value=' + val;
+            function connect(){
+
+                $.getJSON('/interface/ajax/', {'value': val}, function(data, status){
+                $("#para").text(data);
+                val = data;
+                });
+                window.setTimeout(connect, 100);
+            }  
+        });
+
+    }); 
+
+</script>
+
 {% endblock %}
+
+
