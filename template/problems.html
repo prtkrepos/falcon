@@ -16,9 +16,6 @@ Falcon: {{ problem.problem_name }}
 <table>
     <form action='' method='POST' enctype="multipart/form-data">
         {% csrf_token %}
-        {% for field in problem %}
-            <tr><td>{{ field.label_tag  }}</td> <td>{{ field   }}</td></tr>
-        {% endfor %}
         <tr><td>Solution:</td> <td><input type='file' name='solution'/></td></tr>
         <tr><td><input type='submit' value='Submit' /></td></tr>
     </form>
