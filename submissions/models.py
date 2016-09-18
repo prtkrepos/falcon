@@ -5,7 +5,7 @@ CHOICES = (
     ('C++', 'c++'),
 )
 
-class Submissions(models.model):
+class Submissions(models.Model):
     """
     Stores the submission details
     """
